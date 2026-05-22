@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-
-dotenv.config();
+// import dotenv from "dotenv";
+// import "./config/index";
+import config from "./config/index";
+import { logger } from "./config/logger.config";
 
 const app = express();
 
@@ -13,8 +14,6 @@ app.get("/health", (_, res) => {
   res.json({ status: "ok" });
 });
 
-const PORT = process.env.PORT || 8000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`);
 });

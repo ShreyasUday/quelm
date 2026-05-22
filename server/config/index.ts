@@ -1,0 +1,64 @@
+import dotenv from "dotenv";
+import { logger } from "./logger.config";
+
+dotenv.config();
+
+const env = process.env;
+
+const requireEnv = (key: string): string => {
+  const value = env[key];
+
+  if (!value || value.trim() === "") {
+    logger.error(`Missing required environment variable: ${key}`);
+    throw new Error(`Missing required environment variable: ${key}`);
+  }
+
+  return value;
+};
+
+const getString = (key: string, defaultValue: string): string => {
+  const value = env[key];
+
+  if (!value || value.trim() === "") {
+    return defaultValue;
+  }
+
+  return value;
+};
+
+const getNumber = (key: string, defaultValue: number): number => {
+  const value = env[key];
+
+  if (!value || value.trim() === "") {
+    return defaultValue;
+  }
+
+  const parsedValue = Number(value);
+
+  if (Number.isNaN(parsedValue)) {
+    logger.error(
+      `Environment variable ${key} must be a valid number. Received: "${value}"`,
+    );
+    throw new Error(
+      `Environment variable ${key} must be a valid number. Received: "${value}"`,
+    );
+  }
+
+  return parsedValue;
+};
+
+const config = {
+  PORT: getNumber("PORT", 8000),
+
+  DATABASE_URL: requireEnv("DATABASE_URL"),
+
+  REDIS_URL: requireEnv("REDIS_URL"),
+
+  GROQ_API_KEY: requireEnv("GROQ_API_KEY"),
+
+  NODE_ENV: getString("NODE_ENV", "development"),
+  IS_PRODUCTION: getString("NODE_ENV", "development") === "production",
+  IS_DEVELOPMENT: getString("NODE_ENV", "development") === "development",
+} as const;
+
+export default config;
