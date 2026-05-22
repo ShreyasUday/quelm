@@ -55,6 +55,7 @@ const config = {
   REDIS_URL: requireEnv("REDIS_URL"),
 
   GROQ_API_KEY: requireEnv("GROQ_API_KEY"),
+  GROQ_MODEL: getString("GROQ_MODEL", "llama-3.3-70b-versatile"),
 
   NODE_ENV: getString("NODE_ENV", "development"),
   IS_PRODUCTION: getString("NODE_ENV", "development") === "production",
