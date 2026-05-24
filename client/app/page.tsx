@@ -82,16 +82,16 @@ export default function LandingPage() {
       <div className="pointer-events-none fixed inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_35%)]" />
 
-        <div className="absolute left-1/2 top-0 h-[600px] w-[600px] -translate-x-1/2 rounded-full bg-white/[0.03] blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-150 w-150 -translate-x-1/2 rounded-full bg-white/3 blur-3xl" />
 
-        <div className="absolute bottom-0 left-0 h-[400px] w-[400px] rounded-full bg-zinc-500/10 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-100 w-100 rounded-full bg-zinc-500/10 blur-3xl" />
       </div>
 
       {/* Navbar */}
       <header className="sticky top-0 z-50 border-b border-white/5 bg-black/70 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03]">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/3">
               <Workflow className="h-5 w-5 text-white" />
             </div>
 
@@ -138,14 +138,14 @@ export default function LandingPage() {
       {/* Hero */}
       <section className="relative">
         <div className="mx-auto flex max-w-7xl flex-col items-center px-6 pb-24 pt-28 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-zinc-300 backdrop-blur-xl">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/3 px-4 py-2 text-xs font-medium text-zinc-300 backdrop-blur-xl">
             <Sparkles className="h-3.5 w-3.5" />
             AI-Native Workflow Orchestration
           </div>
 
           <h1 className="mt-8 max-w-5xl text-5xl font-semibold tracking-tight text-white md:text-7xl">
             Build and orchestrate
-            <span className="bg-gradient-to-b from-white to-zinc-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-b from-white to-zinc-500 bg-clip-text text-transparent">
               {" "}
               distributed AI workflows
             </span>
@@ -168,7 +168,7 @@ export default function LandingPage() {
 
             <Link
               href="/agents"
-              className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
+              className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:border-white/20 hover:bg-white/5"
             >
               Explore Agents
             </Link>
@@ -176,14 +176,14 @@ export default function LandingPage() {
 
           {/* Hero Preview */}
           {/* Hero Preview */}
-          <div className="relative mt-24 w-full max-w-6xl overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] p-6 shadow-2xl shadow-black/40 backdrop-blur-2xl">
+          <div className="relative mt-24 w-full max-w-6xl overflow-hidden rounded-4xl border border-white/10 bg-white/3 p-6 shadow-2xl shadow-black/40 backdrop-blur-2xl">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_40%)]" />
 
             <div className="relative grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr_320px]">
               {/* Sidebar */}
               <div className="rounded-3xl border border-white/10 bg-black/40 p-5">
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04]">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/4">
                     <Workflow className="h-5 w-5 text-white" />
                   </div>
 
@@ -224,7 +224,7 @@ export default function LandingPage() {
                     return (
                       <div
                         key={item.title}
-                        className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
+                        className="rounded-2xl border border-white/10 bg-white/3 p-4 transition-all duration-300 hover:border-white/20 hover:bg-white/5"
                       >
                         <div className="flex items-start gap-3">
                           <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-black/40">
@@ -248,128 +248,155 @@ export default function LandingPage() {
               </div>
 
               {/* Canvas */}
-              <div className="relative min-h-[500px] overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
-                {/* grid */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:28px_28px]" />
+              <div className="relative min-h-140 overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]">
+                {/* subtle grid */}
+                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-size-[32px_32px]" />
 
-                {/* Top Left Node */}
-                <div className="absolute left-12 top-12 w-[230px] rounded-2xl border border-white/10 bg-zinc-900/95 p-4 shadow-xl">
-                  <div className="flex items-center justify-between">
+                {/* soft radial */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_60%)]" />
+
+                {/* floating workflow badge */}
+                <div className="absolute right-6 top-6 z-20 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 px-4 py-3 backdrop-blur-xl">
+                  <div className="flex items-center gap-2">
+                    <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+
+                    <p className="text-xs font-medium text-emerald-300">
+                      Workflow Running
+                    </p>
+                  </div>
+
+                  <p className="mt-1 text-[11px] text-emerald-200/70">
+                    3 active nodes • 1 completed
+                  </p>
+                </div>
+
+                {/* Edge SVG */}
+                <svg className="absolute inset-0 z-0 h-full w-full">
+                  {/* Edge 1 */}
+                  <path
+                    d="M 300 160 C 420 160, 420 260, 540 260"
+                    stroke="rgba(255,255,255,0.25)"
+                    strokeWidth="2"
+                    fill="transparent"
+                    strokeDasharray="7 7"
+                    strokeLinecap="round"
+                  />
+
+                  {/* Edge 2 */}
+                  <path
+                    d="M 700 300 C 820 300, 820 410, 930 410"
+                    stroke="rgba(255,255,255,0.25)"
+                    strokeWidth="2"
+                    fill="transparent"
+                    strokeDasharray="7 7"
+                    strokeLinecap="round"
+                  />
+                </svg>
+
+                {/* Node 1 */}
+                <div className="absolute left-14 top-20 z-10 w-65 rounded-3xl border border-white/10 bg-zinc-900/95 p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30">
+                  <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/4">
                         <BrainCircuit className="h-5 w-5 text-white" />
                       </div>
 
                       <div>
-                        <h3 className="text-sm font-medium text-white">
+                        <h3 className="text-sm font-semibold text-white">
                           Research Company
                         </h3>
 
-                        <p className="text-xs text-zinc-500">LLM Agent</p>
+                        <p className="mt-1 text-xs text-zinc-500">LLM Agent</p>
                       </div>
                     </div>
 
-                    <div className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                    <div className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-400" />
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-white/5 bg-black/40 p-3">
-                    <p className="text-[11px] leading-relaxed text-zinc-400">
-                      Analyze the company website and summarize business insights.
+                  <div className="mt-5 rounded-2xl border border-white/5 bg-black/40 p-4">
+                    <p className="text-[12px] leading-relaxed text-zinc-400">
+                      Analyze company websites and generate structured business insights.
                     </p>
                   </div>
 
-                  {/* handles */}
+                  <div className="mt-4 flex items-center justify-between text-[11px] text-zinc-500">
+                    <span>gpt-4.1</span>
+                    <span>critical</span>
+                  </div>
+
+                  {/* output handle */}
                   <div className="absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-zinc-900 bg-white" />
                 </div>
 
-                {/* Middle Node */}
-                <div className="absolute left-[43%] top-[40%] w-[240px] rounded-2xl border border-white/10 bg-zinc-900/95 p-4 shadow-xl">
-                  <div className="flex items-center justify-between">
+                {/* Node 2 */}
+                <div className="absolute left-[46%] top-[38%] z-10 w-67.5 rounded-3xl border border-white/10 bg-zinc-900/95 p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30">
+                  <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/4">
                         <Cpu className="h-5 w-5 text-white" />
                       </div>
 
                       <div>
-                        <h3 className="text-sm font-medium text-white">
+                        <h3 className="text-sm font-semibold text-white">
                           Summarize Output
                         </h3>
 
-                        <p className="text-xs text-zinc-500">Transform Agent</p>
+                        <p className="mt-1 text-xs text-zinc-500">Transform Agent</p>
                       </div>
                     </div>
 
-                    <div className="h-2.5 w-2.5 rounded-full bg-yellow-400" />
+                    <div className="mt-1 h-2.5 w-2.5 rounded-full bg-yellow-400" />
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-white/5 bg-black/40 p-3">
-                    <p className="text-[11px] leading-relaxed text-zinc-400">
-                      Convert findings into concise structured markdown.
+                  <div className="mt-5 rounded-2xl border border-white/5 bg-black/40 p-4">
+                    <p className="text-[12px] leading-relaxed text-zinc-400">
+                      Convert raw findings into concise markdown summaries and structured
+                      output.
                     </p>
                   </div>
 
+                  <div className="mt-4 flex items-center justify-between text-[11px] text-zinc-500">
+                    <span>parallel task</span>
+                    <span>retry enabled</span>
+                  </div>
+
+                  {/* handles */}
                   <div className="absolute -left-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-zinc-900 bg-white" />
 
                   <div className="absolute -right-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-zinc-900 bg-white" />
                 </div>
 
-                {/* Bottom Right Node */}
-                <div className="absolute bottom-14 right-10 w-[230px] rounded-2xl border border-white/10 bg-zinc-900/95 p-4 shadow-xl">
-                  <div className="flex items-center justify-between">
+                {/* Node 3 */}
+                <div className="absolute bottom-16 right-10 z-10 w-65 rounded-3xl border border-white/10 bg-zinc-900/95 p-5 backdrop-blur-xl transition-all duration-300 hover:border-white/20 hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/30">
+                  <div className="flex items-start justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/4">
                         <Activity className="h-5 w-5 text-white" />
                       </div>
 
                       <div>
-                        <h3 className="text-sm font-medium text-white">Notify Slack</h3>
+                        <h3 className="text-sm font-semibold text-white">Notify Slack</h3>
 
-                        <p className="text-xs text-zinc-500">HTTP Agent</p>
+                        <p className="mt-1 text-xs text-zinc-500">HTTP Agent</p>
                       </div>
                     </div>
 
-                    <div className="h-2.5 w-2.5 rounded-full bg-zinc-500" />
+                    <div className="mt-1 h-2.5 w-2.5 rounded-full bg-zinc-500" />
                   </div>
 
-                  <div className="mt-4 rounded-xl border border-white/5 bg-black/40 p-3">
-                    <p className="text-[11px] leading-relaxed text-zinc-400">
-                      Send execution summary to engineering channel.
+                  <div className="mt-5 rounded-2xl border border-white/5 bg-black/40 p-4">
+                    <p className="text-[12px] leading-relaxed text-zinc-400">
+                      Send execution summaries to the engineering Slack channel.
                     </p>
                   </div>
 
-                  <div className="absolute -left-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-zinc-900 bg-white" />
-                </div>
-
-                {/* Flow Edges */}
-                <svg className="absolute inset-0 h-full w-full">
-                  <path
-                    d="M 240 130 C 360 130, 340 220, 470 240"
-                    stroke="rgba(255,255,255,0.35)"
-                    strokeWidth="2"
-                    fill="transparent"
-                    strokeDasharray="6 6"
-                  />
-
-                  <path
-                    d="M 600 270 C 720 270, 700 380, 770 410"
-                    stroke="rgba(255,255,255,0.35)"
-                    strokeWidth="2"
-                    fill="transparent"
-                    strokeDasharray="6 6"
-                  />
-                </svg>
-
-                {/* floating stats */}
-                <div className="absolute right-6 top-6 rounded-2xl border border-white/10 bg-black/70 px-4 py-3 backdrop-blur-xl">
-                  <div className="flex items-center gap-2">
-                    <div className="h-2 w-2 rounded-full bg-emerald-400" />
-
-                    <p className="text-xs font-medium text-white">Workflow Running</p>
+                  <div className="mt-4 flex items-center justify-between text-[11px] text-zinc-500">
+                    <span>POST webhook</span>
+                    <span>non-critical</span>
                   </div>
 
-                  <p className="mt-2 text-[11px] text-zinc-500">
-                    3 active nodes • 1 completed
-                  </p>
+                  {/* input handle */}
+                  <div className="absolute -left-2 top-1/2 h-4 w-4 -translate-y-1/2 rounded-full border-2 border-zinc-900 bg-white" />
                 </div>
               </div>
 
@@ -433,7 +460,7 @@ export default function LandingPage() {
       </section>
 
       {/* Stats */}
-      <section className="relative border-y border-white/5 bg-white/[0.02]">
+      <section className="relative border-y border-white/5 bg-white/2">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-6 py-14 md:grid-cols-4">
           {STATS.map((stat) => (
             <div
@@ -452,7 +479,7 @@ export default function LandingPage() {
       <section id="features" className="relative py-28">
         <div className="mx-auto max-w-7xl px-6">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-zinc-300">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/3 px-4 py-2 text-xs font-medium text-zinc-300">
               <Zap className="h-3.5 w-3.5" />
               Platform Features
             </div>
@@ -474,9 +501,9 @@ export default function LandingPage() {
               return (
                 <div
                   key={feature.title}
-                  className="group rounded-[28px] border border-white/5 bg-white/[0.02] p-8 backdrop-blur-xl transition-all duration-300 hover:border-white/10 hover:bg-white/[0.04] hover:shadow-[0_0_40px_rgba(255,255,255,0.03)]"
+                  className="group rounded-[28px] border border-white/5 bg-white/2 p-8 backdrop-blur-xl transition-all duration-300 hover:border-white/10 hover:bg-white/4 hover:shadow-[0_0_40px_rgba(255,255,255,0.03)]"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03]">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/3">
                     <Icon className="h-6 w-6 text-white" />
                   </div>
 
@@ -498,7 +525,7 @@ export default function LandingPage() {
       <section id="architecture" className="relative border-t border-white/5 py-28">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-16 px-6 lg:grid-cols-2">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-medium text-zinc-300">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/3 px-4 py-2 text-xs font-medium text-zinc-300">
               <Server className="h-3.5 w-3.5" />
               System Architecture
             </div>
@@ -530,7 +557,7 @@ export default function LandingPage() {
           </div>
 
           {/* Architecture Visual */}
-          <div className="relative rounded-[32px] border border-white/10 bg-white/[0.02] p-8 backdrop-blur-xl">
+          <div className="relative rounded-4xl border border-white/10 bg-white/2 p-8 backdrop-blur-xl">
             <div className="grid gap-6">
               {[
                 {
@@ -577,8 +604,8 @@ export default function LandingPage() {
       {/* CTA */}
       <section className="relative border-t border-white/5 py-28">
         <div className="mx-auto max-w-4xl px-6 text-center">
-          <div className="rounded-[36px] border border-white/10 bg-white/[0.03] px-8 py-20 backdrop-blur-2xl">
-            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] border border-white/10 bg-white/[0.04]">
+          <div className="rounded-[36px] border border-white/10 bg-white/3 px-8 py-20 backdrop-blur-2xl">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[28px] border border-white/10 bg-white/4">
               <Bot className="h-9 w-9 text-white" />
             </div>
 
@@ -602,7 +629,7 @@ export default function LandingPage() {
 
               <Link
                 href="/workflows/new"
-                className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.03] px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
+                className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/3 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:border-white/20 hover:bg-white/5"
               >
                 Create Workflow
               </Link>
