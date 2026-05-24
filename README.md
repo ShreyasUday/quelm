@@ -131,19 +131,19 @@ flowchart TB
 
 ## Tech Stack
 
-| Layer | Technology | Purpose |
-|---|---|---|
-| Language | TypeScript | End-to-end type safety |
-| Package Manager | pnpm | Fast installs, strict workspace support |
-| Frontend | Next.js + Tailwind + shadcn/ui | Full-stack React, deploys to Vercel |
-| Workflow Canvas | React Flow | Node-based visual editor |
-| Backend | Node.js + Express | REST API server |
-| Queue System | BullMQ + Redis | Task distribution, retries, job state |
-| Database | PostgreSQL + Prisma | Persistent workflow and run state |
-| AI Provider | Groq (LLaMA 3.3 70B) | Fast LLM inference, generous free tier |
-| Real-time | Server-Sent Events | Live run monitor updates |
-| Containerization | Docker Compose | Local Postgres and Redis |
-| Deployment | Vercel + Railway | Frontend and backend hosting |
+| Layer            | Technology                     | Purpose                                 |
+| ---------------- | ------------------------------ | --------------------------------------- |
+| Language         | TypeScript                     | End-to-end type safety                  |
+| Package Manager  | pnpm                           | Fast installs, strict workspace support |
+| Frontend         | Next.js + Tailwind + shadcn/ui | Full-stack React, deploys to Vercel     |
+| Workflow Canvas  | React Flow                     | Node-based visual editor                |
+| Backend          | Node.js + Express              | REST API server                         |
+| Queue System     | BullMQ + Redis                 | Task distribution, retries, job state   |
+| Database         | PostgreSQL + Prisma            | Persistent workflow and run state       |
+| AI Provider      | Groq (LLaMA 3.3 70B)           | Fast LLM inference, generous free tier  |
+| Real-time        | Server-Sent Events             | Live run monitor updates                |
+| Containerization | Docker Compose                 | Local Postgres and Redis                |
+| Deployment       | Vercel + Railway               | Frontend and backend hosting            |
 
 ---
 
@@ -218,6 +218,7 @@ pnpm install
 Create the following `.env` files:
 
 **Root `.env`** — Docker Compose infrastructure:
+
 ```env
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
@@ -225,6 +226,7 @@ POSTGRES_DB=agent_platform
 ```
 
 **`server/.env`** — Application config:
+
 ```env
 # App
 PORT=8000
@@ -240,6 +242,7 @@ GROQ_API_KEY=your_groq_api_key_here
 ```
 
 Copy the example files as a starting point:
+
 ```bash
 cp .env.example .env
 cp server/.env.example server/.env
@@ -250,23 +253,27 @@ Get a free Groq API key at [console.groq.com](https://console.groq.com).
 ### Running Locally
 
 **1. Start infrastructure:**
+
 ```bash
 docker compose up -d
 ```
 
 **2. Run database migrations:**
+
 ```bash
 cd server
 pnpm prisma migrate dev
 ```
 
 **3. Start the server:**
+
 ```bash
 # From root
 pnpm dev:server
 ```
 
 **4. Start the client:**
+
 ```bash
 # From root
 pnpm dev:client
@@ -300,14 +307,15 @@ Errors follow this shape:
 
 ### Workflows
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/workflow` | List all workflow definitions |
-| `GET` | `/api/workflow/:id` | Get a single workflow definition |
-| `POST` | `/api/workflow` | Create a new workflow definition |
-| `POST` | `/api/workflow/:id/run` | Trigger a workflow run |
+| Method | Endpoint                | Description                      |
+| ------ | ----------------------- | -------------------------------- |
+| `GET`  | `/api/workflow`         | List all workflow definitions    |
+| `GET`  | `/api/workflow/:id`     | Get a single workflow definition |
+| `POST` | `/api/workflow`         | Create a new workflow definition |
+| `POST` | `/api/workflow/:id/run` | Trigger a workflow run           |
 
 **Create a workflow:**
+
 ```bash
 POST /api/workflow
 Content-Type: application/json
@@ -325,6 +333,7 @@ Content-Type: application/json
 ```
 
 **Trigger a run:**
+
 ```bash
 POST /api/workflow/:id/run
 Content-Type: application/json
@@ -340,32 +349,32 @@ Content-Type: application/json
 
 ### Runs
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/runs` | List all workflow runs |
-| `GET` | `/api/runs/:id` | Get a run with all its tasks |
-| `GET` | `/api/runs/workflow/:workflowId` | Get all runs for a workflow |
-| `GET` | `/api/runs/:id/stream` | SSE stream for live run updates |
+| Method | Endpoint                         | Description                     |
+| ------ | -------------------------------- | ------------------------------- |
+| `GET`  | `/api/runs`                      | List all workflow runs          |
+| `GET`  | `/api/runs/:id`                  | Get a run with all its tasks    |
+| `GET`  | `/api/runs/workflow/:workflowId` | Get all runs for a workflow     |
+| `GET`  | `/api/runs/:id/stream`           | SSE stream for live run updates |
 
 ### Agents
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/agents` | List all registered agents |
-| `GET` | `/api/agents/:id` | Get a single agent |
+| Method | Endpoint          | Description                |
+| ------ | ----------------- | -------------------------- |
+| `GET`  | `/api/agents`     | List all registered agents |
+| `GET`  | `/api/agents/:id` | Get a single agent         |
 
 ---
 
 ## Agent Types
 
-| Type | Description | Use Case |
-|---|---|---|
-| `LLM_AGENT` | Calls Groq with a configurable prompt template | Summarisation, classification, extraction, generation |
-| `HTTP_AGENT` | Makes an HTTP request to any external API | Fetching data, sending webhooks, third-party integrations |
-| `TRANSFORM_AGENT` | Transforms and reshapes JSON data | Filtering fields, mapping values, formatting |
-| `EXTRACTION_AGENT` | Extracts structured data from unstructured sources | Web scraping, PDF parsing, raw text parsing |
-| `NOTIFICATION_AGENT` | Sends notifications | Emails, Slack messages, webhooks |
-| `STORAGE_AGENT` | Reads from or writes to external storage | Saving results, reading files, S3 operations |
+| Type                 | Description                                        | Use Case                                                  |
+| -------------------- | -------------------------------------------------- | --------------------------------------------------------- |
+| `LLM_AGENT`          | Calls Groq with a configurable prompt template     | Summarisation, classification, extraction, generation     |
+| `HTTP_AGENT`         | Makes an HTTP request to any external API          | Fetching data, sending webhooks, third-party integrations |
+| `TRANSFORM_AGENT`    | Transforms and reshapes JSON data                  | Filtering fields, mapping values, formatting              |
+| `EXTRACTION_AGENT`   | Extracts structured data from unstructured sources | Web scraping, PDF parsing, raw text parsing               |
+| `NOTIFICATION_AGENT` | Sends notifications                                | Emails, Slack messages, webhooks                          |
+| `STORAGE_AGENT`      | Reads from or writes to external storage           | Saving results, reading files, S3 operations              |
 
 ---
 
@@ -436,6 +445,7 @@ Every task has a configurable `maxAttempts` (default 3). BullMQ retries failed j
 ## Deployment
 
 **Frontend — Vercel:**
+
 ```bash
 cd client
 vercel --prod
