@@ -20,6 +20,7 @@ import AgentNode from "@/components/workflows/builder/AgentNode";
 import { AgentNodeData, Task, WorkflowDefinition } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { useRun } from "@/hooks/use-run";
+import RunOutputPanel from "@/components/monitor/RunOutputPanel";
 
 const nodeTypes = { agentNode: AgentNode };
 
@@ -239,7 +240,6 @@ const RunMonitorPage = () => {
           )}
         </div>
       </header>
-
       {/* Canvas */}
       <div className="mt-16 h-[calc(100vh-4rem)]">
         <ReactFlow
@@ -259,7 +259,6 @@ const RunMonitorPage = () => {
           <MiniMap className="bg-card!" nodeColor="#3f3f46" maskColor="rgba(0,0,0,0.6)" />
         </ReactFlow>
       </div>
-
       {/* Task Detail Drawer */}
       {selectedTask && (
         <div
@@ -273,9 +272,12 @@ const RunMonitorPage = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-semibold">{selectedTask.name}</h2>
+
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 {selectedTask.duration !== null && <span>{selectedTask.duration}s</span>}
+
                 <span>Attempt {selectedTask.attempts}</span>
+
                 <button
                   onClick={() => setSelectedTask(null)}
                   className="rounded-lg border border-border p-1.5 hover:bg-accent"
@@ -291,6 +293,7 @@ const RunMonitorPage = () => {
                 <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   Input
                 </p>
+
                 <pre className="max-h-48 overflow-auto rounded-xl border border-border bg-background p-4 text-xs">
                   {JSON.stringify(selectedTask.input, null, 2)}
                 </pre>
@@ -300,6 +303,7 @@ const RunMonitorPage = () => {
                 <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   Output
                 </p>
+
                 <pre className="max-h-48 overflow-auto rounded-xl border border-border bg-background p-4 text-xs">
                   {selectedTask.output
                     ? JSON.stringify(selectedTask.output, null, 2)
@@ -310,6 +314,23 @@ const RunMonitorPage = () => {
           </div>
         </div>
       )}
+      {/* Final Run Output Panel */}
+      {run && (
+        <RunOutputPanel
+          status={run.status}
+          output={run.output}
+          error={run.error}
+          duration={
+            run.completedAt && run.startedAt
+              ? Math.round(
+                  (new Date(run.completedAt).getTime() -
+                    new Date(run.startedAt).getTime()) /
+                    1000,
+                )
+              : null
+          }
+        />
+      )}{" "}
     </div>
   );
 };
