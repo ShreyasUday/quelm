@@ -143,7 +143,7 @@ flowchart TB
 | AI Provider      | Groq (LLaMA 3.3 70B)           | Fast LLM inference, generous free tier  |
 | Real-time        | Server-Sent Events             | Live run monitor updates                |
 | Containerization | Docker Compose                 | Local Postgres and Redis                |
-| Deployment       | Vercel + Railway               | Frontend and backend hosting            |
+| Deployment       | Vercel + Render                | Frontend and backend hosting            |
 
 ---
 
@@ -241,11 +241,18 @@ REDIS_URL=redis://localhost:6379
 GROQ_API_KEY=your_groq_api_key_here
 ```
 
+**`client/.env.local`** — Frontend config:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
 Copy the example files as a starting point:
 
 ```bash
 cp .env.example .env
 cp server/.env.example server/.env
+cp client/.env.local.example client/.env.local
 ```
 
 Get a free Groq API key at [console.groq.com](https://console.groq.com).
@@ -434,7 +441,7 @@ Click Run on any saved workflow, fill in the input payload, and hit Execute. The
 
 ### Live Run Monitor
 
-The frontend opens an SSE connection to `/api/runs/:id/stream`. As each task completes, the worker updates the database and the orchestrator emits an event on the `RunEmitter`. The SSE endpoint pushes that event to the browser, the canvas node changes colour — blue for running, green for completed, red for failed — without a single page refresh.
+The frontend opens an SSE connection to `/api/runs/:id/stream`. As each task completes, the worker updates the database and the orchestrator emits an event on the `RunEmitter`. The SSE endpoint pushes that event to the browser — the canvas node changes colour (blue for running, green for completed, red for failed) without a single page refresh.
 
 ### Retry and Failure Handling
 
@@ -444,32 +451,35 @@ Every task has a configurable `maxAttempts` (default 3). BullMQ retries failed j
 
 ## Deployment
 
-**Frontend — Vercel:**
+### Frontend — Vercel
 
-```bash
-cd client
-vercel --prod
-```
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com) and import the repository
+3. Set the root directory to `client`
+4. Add the environment variable `NEXT_PUBLIC_API_URL` pointing to your Render backend URL
+5. Deploy — Vercel auto-deploys on every push to `main`
 
-**Backend — Railway:**
+### Backend — Render
 
-1. Create a new Railway project
-2. Add a Postgres plugin and a Redis plugin
-3. Deploy the `server/` directory
-4. Set environment variables in the Railway dashboard
+1. Go to [render.com](https://render.com) and create a new **Web Service**
+2. Connect your GitHub repository and set the root directory to `server`
+3. Set the build command to `pnpm install && pnpm prisma generate && pnpm build`
+4. Set the start command to `pnpm start`
+5. Add a **PostgreSQL** database from the Render dashboard — it injects `DATABASE_URL` automatically
+6. Add a **Redis** instance from the Render dashboard — copy the external URL into `REDIS_URL`
+7. Add remaining environment variables — `GROQ_API_KEY`, `PORT`, `NODE_ENV=production`
+8. Deploy
 
-Railway injects `DATABASE_URL` and `REDIS_URL` automatically when you attach the plugins.
+> Both Vercel and Render have free tiers that cover this project with no credit card required.
 
 ---
 
 ## Roadmap
 
+- [ ] User authentication (JWT + refresh tokens)
 - [ ] HTTP Agent implementation
 - [ ] Transform Agent implementation
-- [ ] Frontend Workflow Builder (React Flow)
-- [ ] Live Run Monitor with SSE
-- [ ] System Dashboard
-- [ ] User authentication (JWT)
+- [ ] Node name editing in the workflow builder
 - [ ] Workflow versioning
 - [ ] Scheduled workflow triggers (cron)
 - [ ] Webhook triggers
@@ -479,10 +489,10 @@ Railway injects `DATABASE_URL` and `REDIS_URL` automatically when you attach the
 
 ## Contributing
 
-This project is under active development. Contributions, issues, and feature requests are welcome.
+Contributions, issues, and feature requests are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup instructions, coding standards, branching strategy, and a step-by-step guide to adding new agent types.
 
 1. Fork the repository
 2. Create a feature branch — `git checkout -b feature/my-feature`
 3. Commit your changes — `git commit -m 'feat: add my feature'`
 4. Push to the branch — `git push origin feature/my-feature`
-5. Open a Pull Request
+5. Open a Pull Request against `dev`

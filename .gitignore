@@ -29,6 +29,7 @@ pnpm-debug.log*
 .env
 .env.*
 !.env.example
+!.env.local.example
 next-env.d.ts
 
 # OS files
