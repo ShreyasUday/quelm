@@ -55,6 +55,7 @@ The key insight is the separation between the **orchestrator** (which manages wo
 When a run is triggered, the orchestrator builds an adjacency map from the workflow's edges array. For each node it finds all incoming edges — those source nodes are its dependencies.
 
 For example given edges `[{source: A, target: B}, {source: A, target: C}, {source: B, target: D}, {source: C, target: D}]`:
+
 - Node A has no dependencies — dispatched immediately
 - Nodes B and C depend on A — dispatched when A completes
 - Node D depends on both B and C — dispatched only when both complete
@@ -347,21 +348,21 @@ A monorepo is a single repository containing multiple related packages or applic
 
 ## Key Tradeoffs Made
 
-| Decision | Chosen | Alternative | Reason |
-|---|---|---|---|
-| Queue system | BullMQ | Kafka, RabbitMQ | Right tool for task distribution, not event streaming |
-| Language | TypeScript | JavaScript, Python | End-to-end type safety, single language |
-| Frontend framework | Next.js | Vite + React | API routes, SSR, Vercel deployment |
-| UI components | shadcn/ui | MUI, Chakra | Own the components, no black box dependency |
-| Real-time | SSE | WebSockets | Unidirectional use case, simpler implementation |
-| ORM | Prisma | Drizzle, TypeORM | Cleaner migrations, better DX, larger community |
-| Database | PostgreSQL | MongoDB | Relational structure + JSON columns covers both needs |
-| LLM provider | Groq | OpenAI, Anthropic | Free tier, fastest inference, OpenAI-compatible |
-| Package manager | pnpm | npm, yarn | Strict isolation, faster, better workspaces |
-| Agent architecture | Abstract class | Functions, plugins | Stateful lifecycle (start/stop/heartbeat) suits classes |
-| Error handling | Global middleware | Per-route try/catch | Single source of truth, consistent response shape |
-| Orchestrator events | QueueEvents | Database polling | Event-driven is lower latency and lower database load |
-| Node positions | Calculated linearly | Auto-layout algorithm | Simpler for MVP, auto-layout can be added later |
+| Decision            | Chosen              | Alternative           | Reason                                                  |
+| ------------------- | ------------------- | --------------------- | ------------------------------------------------------- |
+| Queue system        | BullMQ              | Kafka, RabbitMQ       | Right tool for task distribution, not event streaming   |
+| Language            | TypeScript          | JavaScript, Python    | End-to-end type safety, single language                 |
+| Frontend framework  | Next.js             | Vite + React          | API routes, SSR, Vercel deployment                      |
+| UI components       | shadcn/ui           | MUI, Chakra           | Own the components, no black box dependency             |
+| Real-time           | SSE                 | WebSockets            | Unidirectional use case, simpler implementation         |
+| ORM                 | Prisma              | Drizzle, TypeORM      | Cleaner migrations, better DX, larger community         |
+| Database            | PostgreSQL          | MongoDB               | Relational structure + JSON columns covers both needs   |
+| LLM provider        | Groq                | OpenAI, Anthropic     | Free tier, fastest inference, OpenAI-compatible         |
+| Package manager     | pnpm                | npm, yarn             | Strict isolation, faster, better workspaces             |
+| Agent architecture  | Abstract class      | Functions, plugins    | Stateful lifecycle (start/stop/heartbeat) suits classes |
+| Error handling      | Global middleware   | Per-route try/catch   | Single source of truth, consistent response shape       |
+| Orchestrator events | QueueEvents         | Database polling      | Event-driven is lower latency and lower database load   |
+| Node positions      | Calculated linearly | Auto-layout algorithm | Simpler for MVP, auto-layout can be added later         |
 
 ---
 
