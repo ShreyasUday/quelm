@@ -9,6 +9,7 @@ import { AgentRegistry } from "./agents/registry";
 import { Orchestrator } from "./orchestrator";
 import { createApiRoutes } from "./api";
 import { errorHandlerMiddleware } from "./middleware/error.middleware";
+import { requestLogger } from "./middleware/request-logger.middleware";
 
 dotenv.config();
 
@@ -31,12 +32,6 @@ app.use(
     },
   }),
 );
-app.use(express.json());
-
-app.get("/health", (_, res) => {
-  res.json({ status: "ok" });
-});
-
 // Initialize orchestrator
 const orchestrator = new Orchestrator(prisma);
 
@@ -53,7 +48,14 @@ const start = async (): Promise<void> => {
     await orchestrator.start();
     logger.success("Orchestrator started successfully");
 
-    // Wire in the routes and middleware
+    // Wire in the middleware and routes
+    app.use(express.json());
+    app.use(requestLogger);
+
+    app.get("/health", (_, res) => {
+      res.json({ status: "ok" });
+    });
+
     app.use(createApiRoutes(orchestrator, prisma));
     app.use(errorHandlerMiddleware);
 
